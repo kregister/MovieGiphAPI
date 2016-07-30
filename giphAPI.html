@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>MovieGiphTastic</title>
+
+</head>
+
+<body>
+  <!-- Location for the initial movie button array and the New Buttons to be added that end user adds -->
+  <div id="movieButton">
+  </div>
+
+  <!-- HTML Form to Handle the inputs of new movies/items from the end user.  -->
+    <form id="movie-form">
+
+    <!-- Input box Label/Description -->
+      <label for="movie-input">Add a New Movie Title (optional):</label>
+    
+    <!-- Blank Input box for user input -->
+      <input type="text" class="form-control" id="movie-input">
+
+  <!-- I dont understand how this line controls the button when there is no button ID's associated but it controls the Add New Button -->
+      <input type="submit" value="Add New" id="newMovie">
+
+    </form>
+
+    <!-- Location for the movie giph's to appear once the specific title button is selected -->
+    <div id="movies">
+    </div>
+
+  <!-- jQuery Link -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+  <!-- My jQuery -->
+<script type="text/javascript" src="giphAPI.js"></script>
+
+  <!-- Body Closing Tag -->
+</body>
+  <!-- HTML Closing Tag -->
+</html>
