@@ -1,3 +1,5 @@
+
+
 	// Activates jQuery once page is loaded and doesnt require an on-click event
 $(function() {
 
@@ -9,20 +11,23 @@ var movies = ["Harry Potter", "Die Hard", "Gone With The Wind", "Superman", "A K
 
 
 //functions to create buttons from above array and add new buttons inputed by user
-function populateButtons(arrayToUse, classToAdd, areaToAddTo){
-    $(areaToAddTo).empty();
+function populateButtons(movieArray, newClass, newTitleDiv){
+    $(newTitleDiv).empty();
 
-    for (var i = 0; i < arrayToUse.length; i++){
-        var a = $('<button>')
-        a.addClass(classToAdd);
-        a.attr('data-type', arrayToUse[i]);
-        a.text(arrayToUse[i]);
-        $(areaToAddTo).append(a);
+    for (var i = 0; i < movieArray.length; i++){
+        var newButton = $('<button>')
+        newButton.addClass(newClass);
+        newButton.attr('data-title', movieArray[i]);
+        newButton.text(movieArray[i]);
+        $(newTitleDiv).append(newButton);
     }
 
 }
 
 // Public API Key:  dc6zaTOxFJmzC
+
+   // var title = $(this).data('title');
+   // var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=dc6zaTOxFJmzC&limit=15";
 
 // Movies is the Category
  
@@ -52,5 +57,5 @@ function populateButtons(arrayToUse, classToAdd, areaToAddTo){
  
 // BIGGEST advice is revert to activities we did in class. This was huge when I did my assignment. I thought of what I wanted to accomplish and found the code those activities.
 
-    return false;
-});
+  //  return false;
+//});
