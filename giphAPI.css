@@ -1,1 +1,62 @@
-background-color: red;
+body {
+	font-size: 20px;
+	font-family: 'Harmattan', 'Nosifer', arial, sans-serif;
+	background-image: url(blk_grey_texture.jpg);
+	background-position: center;
+	background-size: 1450px 1200px
+	margin-left: 25px;
+	margin-top: 25px;
+	margin-right: 25px;
+	padding: 20px;
+
+}
+
+label {
+	font-size: 22px;
+	color: #F5F5F5;
+	font-family: 'Harmattan', 'Amatic SC', arial, sans-serif;
+	font-weight: bold;
+}
+
+
+button {
+	font-family: 'Harmattan', 'Amatic SC', arial, sans-serif;
+	background: #5E5E5E;
+	font-effect: outline;
+	font-size: 22px;
+	font-weight: bold;
+	color: #F5F5F5;
+	padding: 10px 10px;
+	margin: 10px 5px 5px 20px;
+	cursor: pointer;
+    box-shadow: 2px 2px 2px #363636;
+    position: center;
+}
+
+button.active {
+	background: #E0E0E0;
+	font-size: 22px;
+	padding: 12px 20px;
+	color: black;
+	cursor: pointer;
+}
+
+.movie-item {
+	float: center;
+	padding: 0 5px 5px 0;
+	box-sizing: border-box;
+	font-size: 25px;
+}
+
+
+.p {
+	float: left;
+	font-family: 'Amatic+SC', 'Harmattan', arial, sans-serif;
+	text-decoration: underline;
+	font-weight: bold;
+	color: #F5F5F5;
+	margin-left: 15%;
+	padding: 10px 18px;
+	display: inline-block;
+
+}

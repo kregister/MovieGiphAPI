@@ -1,61 +1,122 @@
 
 
-	// Activates jQuery once page is loaded and doesnt require an on-click event
+// Activates jQuery once page is loaded and doesnt require an on-click event
 $(function() {
 
-//movie title array
-var movies = ["Harry Potter", "Die Hard", "Gone With The Wind", "Superman", "A Knights Tale", "The Little Mermaid", "The Dark Knight", "Lion King", "Top Gun", "Home Alone", "Finding Nemo", "Minions", "Ace Ventura", "Hocus Pocus", "Star Trek", "Grease", "Toy Story", "Captain America", "Iron Man", "Avatar", "Star Wars"];
-
-    populateButtons(movies, 'movieButton', '#movieButton');
+// Movies is the Category
+    titleButtons(movies, 'movieButton', '#movieButton');
 });
 
+// Movie title array
+var movies = ["Harry Potter", "Die Hard", "Superman", "A Knights Tale", "The Little Mermaid", "The Dark Knight", "Lion King", "Top Gun", "Home Alone", "Finding Nemo", "Minions", "Ace Ventura", "Hocus Pocus", "Star Trek", "Grease", "Toy Story", "Captain America", "Iron Man", "Avatar", "Star Wars"];
 
 //functions to create buttons from above array and add new buttons inputed by user
-function populateButtons(movieArray, newClass, newTitleDiv){
+function titleButtons(movieArray, newClass, newTitleDiv){
     $(newTitleDiv).empty();
 
     for (var i = 0; i < movieArray.length; i++){
+        
         var newButton = $('<button>')
         newButton.addClass(newClass);
         newButton.attr('data-title', movieArray[i]);
         newButton.text(movieArray[i]);
         $(newTitleDiv).append(newButton);
+
+        // console.log(titleButtons);
+        // console.log(newTitleDiv);
+        // console.log(newButton);
+        // console.log(newClass);
     }
 
 }
 
-// Public API Key:  dc6zaTOxFJmzC
+//Runs API Call and modifies the state of the button
+    $(document).on('click', '.movieButton', function(){
+    $('#movies').empty();
+    $('.movieButton').removeClass('active');
+    $(this).addClass('active');
 
-   // var title = $(this).data('title');
-   // var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=dc6zaTOxFJmzC&limit=15";
+// Type = Movie Title
+    var type = $(this).data('title');
 
-// Movies is the Category
+//API Call URL & Key
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+    $.ajax({url: queryURL, method: 'GET'})
+     .done(function(response) {
+         var results = response.data;
+
+        console.log(response)
+
+// For loop runs the API results
+         for(var i=0; i < results.length; i++){
+
+// New DIV for the retults    
+            var movieDiv = $('<div class="movie-item">');
+
+// Calls the return item an Image
+            var movieGiph = $('<img>');
+
+// New variable to add the Rating to each result
+            var p = $('<p>').text( "Rating: " + results[i].rating + " ");
+
+// Animate & Still Variables
+            var animated = results[i].images.fixed_height.url;
+            var still = results[i].images.fixed_height_still.url;
+
+// Adding attributes to MovieGiph & P and appending to MovieDiv
+            movieGiph.attr('fixed_height', 150);
+            movieGiph.attr('src', still);
+            movieGiph.attr('data-still', still);
+            movieGiph.attr('data-animate', animated);
+            movieGiph.attr('data-state', 'still');
+            movieGiph.addClass("movieGiph");
+            p.addClass("p");
+            p.append(movieGiph);
+            movieDiv.append(p);
+
+// Appending MovieDiv to Movies ID
+            $('#movies').append(movieDiv);
+        }
+        
+    });
+
+});
  
-// and then close that at the bottom
+// On click function added to each movieGiph and which will modify the state of the Giph via the If statements below
+$(document).on('click', '.movieGiph', function(){
+    var state = $(this).attr('data-state');
 
+// If else statments to control the state of the Giph whenever cliked
 
-// then
+    if (state == 'still'){
 
- 
-// 1. topics array
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+    }
 
-  
-// 2. for loop going through topics array to create buttons
+    else{
 
- 
-// 3. on click function to add a new button from the input form
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+    }
 
- 
-// 4. on click function for what happens when you click on the button (this is the API call area, the creation of the image, etc)
+})
 
- 
-// 5. on click function for what happens when you click on an image (this is the animate/still area)
+// On click function using the submit button to capture the user input values
+$('#newMovie').on('click', function(){
+    var addMovie = $('input').val();
 
- 
-// as you can see, it's in the order of how you would go through the page
+    console.log(addMovie);
 
- 
-// BIGGEST advice is revert to activities we did in class. This was huge when I did my assignment. I thought of what I wanted to accomplish and found the code those activities.
+// Pushes the new user input value into the movie array
+    movies.push(addMovie);
 
-  //  return false;
-//});
+// Issues the above as a button by re-calling the titleButtons
+    titleButtons(movies, 'movieButton', '#movieButton');
+
+    console.log('clicked')
+
+// Keeps the page from refreshing automatically
+    return false;
+});
