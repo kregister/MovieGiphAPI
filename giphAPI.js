@@ -58,7 +58,10 @@ function titleButtons(movieArray, newClass, newTitleDiv){
             var movieGiph = $('<img>');
 
 // New variable to add the Rating to each result
+            var myDiv = $('<div>');
             var p = $('<p>').text( "Rating: " + results[i].rating + " ");
+            p.addClass("p");
+            myDiv.append(p);
 
 // Animate & Still Variables
             var animated = results[i].images.fixed_height.url;
@@ -71,9 +74,13 @@ function titleButtons(movieArray, newClass, newTitleDiv){
             movieGiph.attr('data-animate', animated);
             movieGiph.attr('data-state', 'still');
             movieGiph.addClass("movieGiph");
-            p.addClass("p");
-            p.append(movieGiph);
-            movieDiv.append(p);
+             //p.addClass("p");
+            var lineSeparator = $('<hr>');
+
+            movieDiv.append(myDiv);
+            movieDiv.append(movieGiph);
+            movieDiv.append(lineSeparator);
+            
 
 // Appending MovieDiv to Movies ID
             $('#movies').append(movieDiv);
